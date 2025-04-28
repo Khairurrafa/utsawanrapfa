@@ -20,9 +20,14 @@ jobs:
       - name: Deploy to Amazon EC2
         run: |
           ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
-            cd /var/www/html/utsawanrapfa
-            git pull origin main
-            sudo systemctl realod nginx
+            set -e
+            cd /var/www/html/utsawanrapfa # Ganti dengan direktori yang sesuai dengan setupmu
+            sudo git fetch origin
+            sudo git reset --hard origin/main
+            sudo chown -R ec2-user:nginx /var/www/html/utsawanrapfa/ # Sesuaikan dengan user dan group yang
+            digunakan
+            sudo chmod -R 775 /var/www/html/utsawanrapfa/ # Sesuaikan dengan izin yang kamu inginkan
+            sudo systemctl reload nginx
           EOF
         env:
           SSH_PRIVATE_ KEY: ${{ secrets.SSH_PRIVATE_KEY }}
