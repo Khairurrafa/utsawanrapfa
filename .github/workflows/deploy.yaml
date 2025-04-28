@@ -20,7 +20,7 @@ jobs:
       - name: Deploy to Amazon EC2
         run: |
           ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
-            cd /var/www/html
+            cd /var/www/html/utsawanrapfa
             git pull origin main
             sudo systemctl realod nginx
           EOF
