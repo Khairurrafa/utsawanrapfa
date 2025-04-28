@@ -19,15 +19,10 @@ jobs:
 
       - name: Deploy to Amazon EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
-            set -e
+          ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_PUBLIC_IP }} << 'EOF
             cd /var/www/html 
-            sudo git fetch origin
-            sudo git reset --hard origin/main
-            sudo chown -R ec2-user:nginx /var/www/html/ 
-            sudo chmod -R 775 /var/www/html/ 
-            sudo systemctl reload nginx
-            echo "Deployment successful!"
+            git pull origin main
+            sudo systemctl realod nginx
           EOF
         env:
           SSH_PRIVATE_ KEY: ${{ secrets.SSH_PRIVATE_KEY }}
