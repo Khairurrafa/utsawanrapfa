@@ -24,8 +24,7 @@ jobs:
             cd /var/www/html/utsawanrapfa # Ganti dengan direktori yang sesuai dengan setupmu
             sudo git fetch origin
             sudo git reset --hard origin/main
-            sudo chown -R ec2-user:nginx /var/www/html/utsawanrapfa/ # Sesuaikan dengan user dan group yang
-            digunakan
+            sudo chown -R ec2-user:nginx /var/www/html/utsawanrapfa/ # Sesuaikan dengan user dan group yang digunakan
             sudo chmod -R 775 /var/www/html/utsawanrapfa/ # Sesuaikan dengan izin yang kamu inginkan
             sudo systemctl reload nginx
           EOF
